@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,12 +6,22 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import {show} from './src/helpers/notify';
+import PushNotification from 'react-native-push-notification';
 
 const App = () => {
+  useEffect(() => {
+    PushNotification.getChannels(function (channel_ids) {
+      console.log(channel_ids); // ['channel_id_1']
+    });
+  }, []);
+
   const notify = () => {
     console.log('useEffect started');
-    show('hello', 'message');
+    PushNotification.localNotification({
+      channelId: 'default-channel-id',
+      title: 'hello',
+      message: 'world',
+    });
     console.log('useEffect finished');
   };
 
