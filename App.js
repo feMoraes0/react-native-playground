@@ -1,113 +1,70 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  useEffect(() => {
+    PushNotification.getChannels(function (channel_ids) {
+      console.log(channel_ids); // ['channel_id_1']
+    });
+  }, []);
 
-const App: () => React$Node = () => {
+  const notify = () => {
+    console.log('useEffect started');
+    PushNotification.localNotification({
+      channelId: 'default-channel-id',
+      title: 'hello',
+      message: 'world',
+    });
+    console.log('useEffect finished');
+  };
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+      <View style={styles.body}>
+        <Text style={styles.text}>
+          React Native project to practise local notification
+        </Text>
+        <TouchableOpacity onPress={() => notify()}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Notify!</Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
-    backgroundColor: Colors.white,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#292830',
+    padding: 60,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  text: {
+    textAlign: 'center',
+    fontSize: 25,
+    color: '#18B6EC',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  button: {
+    backgroundColor: '#18B6EC',
+    padding: 15,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 30,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  buttonText: {
+    fontSize: 17,
   },
 });
 
