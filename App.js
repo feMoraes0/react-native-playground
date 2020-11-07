@@ -1,75 +1,45 @@
-import React, {useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-} from 'react-native';
-import Notifications from './projects/notifications';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/screens/home';
+import Notifications from './src/screens/notifications';
+import { kBackgroundColour, kFontFamily, kMainColour } from './src/utils/styles'
+
+const { Navigator, Screen } = createStackNavigator();
 
 const App = () => {
+  const screenOptions = (title) => {
+    return {
+      title: title,
+      headerStyle: {
+        backgroundColor: kBackgroundColour,
+        elevation: 0
+      },
+      headerTitleStyle: {
+        fontFamily: kFontFamily
+      },
+      headerTintColor: kMainColour,
+    }
+  }
+
   return (
-    <>
-      <StatusBar barStyle="light-content" backgroundColor='#292830' />
-      <View style={styles.body}>
-        <ScrollView style={styles.scrollView}>
-          <Text style={styles.title}>Projects</Text>
-          <View style={styles.cards}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Notifications</Text>
-              <Text style={styles.cardSubtitle}>Local notification using react-native-push-notification package.</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    </>
+    <NavigationContainer>
+      <Navigator initialRouteName="/">
+        <Screen
+          name="/"
+          component={Home}
+          options={{
+            header: () => {}
+          }}
+        ></Screen>
+        <Screen
+          name="/notifications"
+          component={Notifications}
+          options={screenOptions('Notifications')}
+        ></Screen>
+      </Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    backgroundColor: '#292830',
-  },
-  title: {
-    marginVertical: 20,
-    fontFamily: 'SpaceGrotesk',
-    fontSize: 33,
-    color: '#3FB350',
-    textAlign: 'center',
-  },
-  scrollView: {
-    alignSelf: 'stretch',
-  },
-  cards: {
-    flex: 1,
-    alignSelf: 'stretch',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 15
-  },
-  card: {
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 5,
-    backgroundColor: '#212028'
-  },
-  cardTitle: {
-    fontSize: 20,
-    color: '#F2F2F2',
-    marginBottom: 5,
-    fontFamily: 'SpaceGrotesk',
-  },
-  cardSubtitle: {
-    fontSize: 16,
-    color: '#808080',
-    fontFamily: 'SpaceGrotesk',
-  }
-});
 
 export default App;

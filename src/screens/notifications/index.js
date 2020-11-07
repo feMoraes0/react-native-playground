@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PushNotification from 'react-native-push-notification';
+import { kBackgroundColour, kFontFamily, kMainColour } from '../../utils/styles'
 
 const Notifications = () => {
   useEffect(() => {
@@ -27,14 +28,14 @@ const Notifications = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.body}>
-        <Text style={styles.text}>
-          React Native project to practise local notification
+      <StatusBar barStyle="light-content" backgroundColor={kBackgroundColour} />
+      <View style={[styles.body, {backgroundColor: kBackgroundColour}]}>
+        <Text style={[styles.text, {fontFamily: kFontFamily, color: kMainColour}]}>
+          Local notification
         </Text>
         <TouchableOpacity onPress={() => notify()}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Notify!</Text>
+          <View style={[styles.button, {backgroundColor: kMainColour}]}>
+            <Text style={[styles.buttonText, {fontFamily: kFontFamily, color: kBackgroundColour}]}>Notify!</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -47,16 +48,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#292830',
-    padding: 60,
+    paddingHorizontal: 60,
   },
   text: {
     textAlign: 'center',
     fontSize: 25,
-    color: '#18B6EC',
   },
   button: {
-    backgroundColor: '#18B6EC',
     padding: 15,
     borderRadius: 5,
     flexDirection: 'row',
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   buttonText: {
-    fontSize: 17,
+    fontSize: 18,
   },
 });
 
