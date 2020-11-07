@@ -5,38 +5,25 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  FlatList,
+  ScrollView,
 } from 'react-native';
-import PushNotification from 'react-native-push-notification';
+import Notifications from './projects/notifications';
 
 const App = () => {
-  useEffect(() => {
-    PushNotification.getChannels(function (channel_ids) {
-      console.log(channel_ids); // ['channel_id_1']
-    });
-  }, []);
-
-  const notify = () => {
-    console.log('useEffect started');
-    PushNotification.localNotification({
-      channelId: 'default-channel-id',
-      title: 'hello',
-      message: 'world',
-    });
-    console.log('useEffect finished');
-  };
-
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" backgroundColor='#292830' />
       <View style={styles.body}>
-        <Text style={styles.text}>
-          React Native project to practise local notification
-        </Text>
-        <TouchableOpacity onPress={() => notify()}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Notify!</Text>
+        <ScrollView style={styles.scrollView}>
+          <Text style={styles.title}>Projects</Text>
+          <View style={styles.cards}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Notifications</Text>
+              <Text style={styles.cardSubtitle}>Local notification using react-native-push-notification package.</Text>
+            </View>
           </View>
-        </TouchableOpacity>
+        </ScrollView>
       </View>
     </>
   );
@@ -46,26 +33,43 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#292830',
-    padding: 60,
   },
-  text: {
+  title: {
+    marginVertical: 20,
+    fontFamily: 'SpaceGrotesk',
+    fontSize: 33,
+    color: '#3FB350',
     textAlign: 'center',
-    fontSize: 25,
-    color: '#18B6EC',
   },
-  button: {
-    backgroundColor: '#18B6EC',
+  scrollView: {
+    alignSelf: 'stretch',
+  },
+  cards: {
+    flex: 1,
+    alignSelf: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 15
+  },
+  card: {
     padding: 15,
+    marginBottom: 10,
     borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 30,
+    backgroundColor: '#212028'
   },
-  buttonText: {
-    fontSize: 17,
+  cardTitle: {
+    fontSize: 20,
+    color: '#F2F2F2',
+    marginBottom: 5,
+    fontFamily: 'SpaceGrotesk',
   },
+  cardSubtitle: {
+    fontSize: 16,
+    color: '#808080',
+    fontFamily: 'SpaceGrotesk',
+  }
 });
 
 export default App;
