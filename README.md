@@ -1,17 +1,12 @@
-<h1 align="center">Playground</h1>
+<h1 align="center">React Native Playground</h1>
 
-<!-- <p align="center">
-  <img width="250" src="URL">
-</p> -->
+## :question: How does it works?
+The master branch is used as basic project where all other branches will use as start, so at the end, master will be the most out to date branch and the projects will be divided by branches with all necessary steps which the developer took.
 
-## :rocket: Knowledges
- - `Navigation` with `React Navigation` package
- - `Local notifications` with `React Native Push Notification` package
+All useful links and informations about how to do something similar to what was developed in each branch can be find in their own Readme.md file.
 
-## :paperclip: Useful Links
- - [React Navigation](https://reactnavigation.org/)
- - [React Native Push Notification](https://www.npmjs.com/package/react-native-push-notification)
-
+## :trident: Branches
+ - [notifications](https://github.com/feMoraes0/react-native-playground/tree/notifications)
 ## :book: How to use
 
 To clone and run this application, you'll need [Git](https://git-scm.com/downloads) and [React Native](https://reactnative.dev/docs/getting-started) installed on your computer. From your command line:
