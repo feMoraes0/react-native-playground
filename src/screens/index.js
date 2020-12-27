@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const Scaffold = () => {
+const MenuAnimation = () => {
   return (
     <View style={styles.container}>
+      <View style={styles.header} />
       <Text style={styles.text}> Scaffold Screen </Text>
     </View>
   );
@@ -22,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Scaffold;
+export default MenuAnimation;
