@@ -5,7 +5,7 @@ import MenuAnimation from './src/screens';
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <MenuAnimation />
     </>
   );
